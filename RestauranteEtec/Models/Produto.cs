@@ -8,20 +8,30 @@ namespace RestauranteEtec.Models
     {
         [Key]
         public int Id { get; set; }
-        [Required]
-        [StringLength(50)]
+
+        [Required(ErrorMessage = "Por favor, informe o nome do produto")]
+        [StringLength(50, ErrorMessage = "O nome deve possuir no máximo 50 caracteres")]
         public string Nome { get; set; }
-        [Required]
-        [StringLength(200)]
+
+        [Display(Name = "Descrição")]
+        [Required(ErrorMessage = "Por favor, informe a descrição do produto")]
+        [StringLength(200, ErrorMessage = "A descrição deve possuir no máximo 50 caracteres")]
         public string Descricao { get; set; }
-        [Required]
-        [Range(0.01, 1000)]
+
+        [Display(Name = "Preço")]
+        [Required(ErrorMessage = "Por favor, informe o preço do produto")]        
         public double Preco { get; set; }
+
         [StringLength(200)]
         public string Foto { get; set; }
-        [Required]
+
+        [Display(Name = "Categoria")]
+        [Required(ErrorMessage = "Por favor, informe a categoria do produto")]
         public int CategoriaId { get; set; }
+
         public Categoria Categoria { get; set; }
+
+        [Display(Name = "Destaque?")]
         public bool ExibirHome { get; set; }
     }
 }

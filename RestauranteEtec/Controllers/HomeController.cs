@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using RestauranteEtec.Data;
 using RestauranteEtec.Models;
@@ -23,8 +24,9 @@ namespace RestauranteEtec.Controllers
 
         public IActionResult Index()
         {
-            var categoria = _contexto.Categorias.ToList();
-            ViewData["Categoria"] = categoria;
+            var chefes = _contexto.Funcionarios.Include(f => f.Cargo)
+                .Where(f => f.ExibirHome).OrderBy(f => f.OrdemExibicao).ToList();
+            ViewData["Chefes"] = chefes; //tem q botar o add-migration dnv?
             return View();
         }
 

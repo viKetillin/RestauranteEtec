@@ -14,9 +14,100 @@ namespace RestauranteEtec.Data
 
         }
 
-        public DbSet<Categoria> Categorias { get; set; }
-        public DbSet<Produto> Produtos { get; set; }
-        public DbSet<Reserva> Reservas { get; set; }
+        public DbSet<Blog> Blog { get; set; }
         public DbSet<Cargo> Cargos { get; set; }
+        public DbSet<Categoria> Categorias { get; set; }
+        public DbSet<Contato> Contatos { get; set; }
+        public DbSet<Funcionario> Funcionarios { get; set; }
+        public DbSet<Produto> Produtos { get; set; }
+        public DbSet<Relato> Relatos { get; set; }
+        public DbSet<Reserva> Reservas { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            #region Cargo Seed
+            modelBuilder.Entity<Cargo>().HasData(
+
+            new Cargo()
+            {
+                Id = 1,
+                Nome = "CEO, Cofundador"
+            },
+            new Cargo()
+            {
+                Id = 2,
+                Nome = "Cozinheiro Chefe"
+            },
+            new Cargo()
+            {
+                Id = 3,
+                Nome = "Chefe de Cozinha"
+            });
+            #endregion
+
+            #region Funcionario Seed
+            modelBuilder.Entity<Funcionario>().HasData(
+            new Funcionario()
+            {
+                Id = 1,
+                Nome = "John Gustavo",
+                Texto = "I am an ambitious workaholic, but apart from that, pretty simple person.",
+                CargoId = 1,
+                ExibirHome = true,
+                OrdemExibicao = 1,
+                Foto = "images/funcionarios/chef-4.jpg"
+            }, new Funcionario()
+            {
+                Id = 2,
+                Nome = "Michelle Fraulen",
+                Texto = "I am an ambitious workaholic, but apart from that, pretty simple person.",
+                CargoId = 2,
+                ExibirHome = true,
+                OrdemExibicao = 2,
+                Foto = "images/funcionarios/chef-2.jpg"
+            },
+            new Funcionario()
+            {
+                Id = 3,
+                Nome = "Alfred Smith",
+                Texto = "I am an ambitious workaholic, but apart from that, pretty simple person.",
+                CargoId = 3,
+                ExibirHome = true,
+                OrdemExibicao = 3,
+                Foto = "images/funcionarios/chef-3.jpg"
+            }, new Funcionario()
+            {
+                Id = 4,
+                Nome = "Antonio Santibanez",
+                Texto = "I am an ambitious workaholic, but apart from that, pretty simple person.",
+                CargoId = 3,
+                ExibirHome = true,
+                OrdemExibicao = 4,
+                Foto = "images/funcionarios/chef-1.jpg"
+            });
+            #endregion
+
+            #region Categoria Seed
+            modelBuilder.Entity<Categoria>().HasData(
+            new Categoria()
+            {
+                Id = 1,
+                Nome = "Entradas"
+            }, new Categoria()
+            {
+                Id = 2,
+                Nome = "Prato Principal"
+            }, new Categoria()
+            {
+                Id = 3,
+                Nome = "Sobremesa"
+            }, new Categoria()
+            {
+                Id = 4,
+                Nome = "Bebidas"
+            });
+            #endregion
+        }
+
     }
 }
