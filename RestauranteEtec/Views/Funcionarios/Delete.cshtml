@@ -1,0 +1,53 @@
+﻿@model RestauranteEtec.Models.Funcionario
+
+@{
+    ViewData["Title"] = "Funcionário";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div>
+    <h4>Funcionario</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-3">
+            <img src="@(System.IO.File.Exists(ViewData["wwwroot"] + "/" + Model.Foto) ?
+                        Url.Content("~/" + Model.Foto) : Url.Content("~/images/sem_foto.png"))" 
+                 class="img-fluid" id="PreviewImagem"/>
+        </div>
+        <div class="col-md-9">
+            <div class="row">
+                <label class="col-3" asp-for="Nome"></label>
+                <label>@Html.DisplayFor(model => model.Nome)</label>
+            </div>
+            <div class="row">
+                <label class="col-3" asp-for="Texto"></label>
+                <label>@Html.DisplayFor(model => model.Texto)</label>
+            </div>
+            <div class="row">
+                <label class="col-3" asp-for="CargoId"></label>
+                <label>@Html.DisplayFor(model => model.Cargo.Nome)</label>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <div class="icheck-material-white">
+                        <input type="checkbox" asp-for="ExibirHome" disabled/>
+                        <label asp-for="ExibirHome"></label>
+                    </div>
+                </div>
+                <div class="col-6 pt-1">
+                    <label asp-for="OrdemExibicao"></label>
+                    <label>@Html.DisplayFor(model => model.OrdemExibicao)</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <form asp-action="Delete" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
+        <h5 class="my-3">Confirma a exclusão deste funcionário?</h5>
+        <div class="form-group">
+            <input type="submit" value="Excluir" class="btn btn-danger mr-2" />
+            <a asp-action="Index" class="btn btn-light">Cancelar</a>
+        </div>       
+    </form>
+</div>

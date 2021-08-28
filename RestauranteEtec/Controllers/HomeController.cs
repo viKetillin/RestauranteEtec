@@ -26,7 +26,7 @@ namespace RestauranteEtec.Controllers
         {
             var chefes = _contexto.Funcionarios.Include(f => f.Cargo)
                 .Where(f => f.ExibirHome).OrderBy(f => f.OrdemExibicao).ToList();
-            ViewData["Chefes"] = chefes; //tem q botar o add-migration dnv?
+            ViewData["Chefes"] = chefes; 
             return View();
         }
 
